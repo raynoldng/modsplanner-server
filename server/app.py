@@ -16,8 +16,8 @@ def index():
 @app.route('/api/<int:semester>/<int:numToTake>/<string:compMods>/<string:optMods>/<string:options>')
 
 def apiQuery(semester, numToTake, compMods, optMods, options):
-	compMods = compMods.split(',')
-	optMods = optMods.split(',')
+	compMods = compMods.split(',') if compMods != 'null' else []
+	optMods = optMods.split(',') if optMods != 'null' else []
 	options = json.loads(options)
 
 	if semester == 1:
@@ -33,4 +33,4 @@ def apiQuery(semester, numToTake, compMods, optMods, options):
 
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(host = '0.0.0.0', debug = True)
